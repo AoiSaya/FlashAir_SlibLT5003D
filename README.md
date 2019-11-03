@@ -1,6 +1,6 @@
 # Lua library for  LED10x10 with LT-5003D for FlashAir.
 
-これはFlashAirで秋月電子の 10x10ドットマトリクスLED LT-5003Dを
+これはFlashAirで秋月電子の 10x10ドットマトリクスLED LT-5003Dを  
 Hideshi Maeno さんが作成されたLED基板(LED10x10)で制御するためのライブラリです。  
 日本語表示も可能です。  
 FlashAir W-04のファームウェア v4.00.03以降で動作します。  
@@ -73,7 +73,7 @@ VSS(3,6)|G   | GND
 
 関数 | 説明  
 --- | ---  
-SlibLT5003D:setup(n_disp) | Slib14SEGx8:setup(n_disp,led_type) | **FlashAirの端子をSPIに切り替えて、LEDの表示をクリアします**<BR>**n_disp:** LED10x10基板の接続個数<BR>
+SlibLT5003D:setup(n_disp) | **FlashAirの端子をSPIに切り替えて、LEDの表示をクリアします**<BR>**n_disp:** LED10x10基板の接続個数<BR>
 SlibLT5003D:write(bitmap) |**ビットマップデータをLEDに転送します**<BR>**bitmap:** ビットマップデータ
 SlibLT5003D:cls() | **LEDの表示をクリアします**
 
@@ -85,7 +85,6 @@ sample_kanji.lua    -- 10x10フォントを使って日本語メッセージを�
 
 
 ### 日本語フォントを使う方法
-<img src="img/sample01.jpg" width="400">
 
 日本語フォントを使う場合は、下記のレポジトリをご参照ください。  
 https://github.com/AoiSaya/FlashAir_SlibJfont  
