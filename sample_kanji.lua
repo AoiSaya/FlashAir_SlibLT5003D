@@ -27,41 +27,43 @@ local k1010	 = jfont:open("mplus_j10r.sef")
 local k1005	 = jfont:open("mplus_f10r.sef")
 
 local strEUC, euc_length, p
-local n_disp=1
-local bitmap,fh,fw,p
+local bitmap,fh,fw,d
 local data = {}
 local BE = bit32.extract
+
+local n_disp = 1
+local wait = 50
 local str= {
-"こんにちは世界！　",
+"こんにちは世界!　",
 "FlashAir ",
-"Demonstralion ",
+"Demonstration  ",
 }
 
 led:setup(n_disp)
 jfont:setFont(k1005,k1010)
 
-for i=1,15 do
+for i=1,10 do
 	data[i] = 0
 end
 while 1 do
 --chkBreak(2000)
-for _,strUTF8 in ipairs(str) do
-	strEUC, euc_length = jfont:utf82euc(strUTF8)
-	p=1
-	while p<=#strEUC do
-		bitmap,fh,fw,p = jfont:getFont(strEUC, p)
-		for i=1,fw+1 do
-			data = {table.unpack(data,2)} -- scroll
-			d = i<=fw and bitmap[i] or 0
-			d = BE(d,0)*512+BE(d,1)*256+BE(d,2)*128+BE(d,3)*64+BE(d,4)*32
-			   +BE(d,5)*16 +BE(d,6)*8  +BE(d,7)*4  +BE(d,8)*2 +BE(d,9)
-			data[10] = d
-			for j=1,1000 do
-				led:write(data)
+	for _,strUTF8 in ipairs(str) do
+		strEUC, euc_length = jfont:utf82euc(strUTF8)
+		p=1
+		while p<=#strEUC do
+			bitmap,fh,fw,p = jfont:getFont(strEUC, p)
+			for i=1,fw do
+				data = {table.unpack(data,2)} -- scroll
+				d = i<=fw and bitmap[i] or 0
+				d = BE(d,0)*512+BE(d,1)*256+BE(d,2)*128+BE(d,3)*64+BE(d,4)*32
+				   +BE(d,5)*16 +BE(d,6)*8  +BE(d,7)*4  +BE(d,8)*2 +BE(d,9) -- bit reverse
+				data[10] = d
+				for j=1,wait do
+					led:write(data)
+				end
+				chkBreak()
 			end
-			chkBreak()
+			collectgarbage()
 		end
-		collectgarbage()
-	end
 	end
 end

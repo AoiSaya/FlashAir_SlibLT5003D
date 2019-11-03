@@ -21,13 +21,12 @@ end
 local myDir  = script_path()
 led = require (myDir.."lib/SlibLT5003D")
 local bitmap={}
-local heart={0x070,0x0F8,0x1F8,0x1F0,0x3E0,0x1F0,0x1F8,0x0F8,0x070,0x000}
-
+local heart={0x070,0x0F8,0x0FC,0x07C,0x03E,0x07C,0x0FC,0x0F8,0x070,0x000}
 local n_disp=1
 
 led:setup(n_disp)
 
-for i=1,1000 do
+for i=1,10000 do
 	led:write(heart)
 	chkBreak()
 end
@@ -41,4 +40,3 @@ for i=1,1000 do
 	end
 	chkBreak()
 end
-
